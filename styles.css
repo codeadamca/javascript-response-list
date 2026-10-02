@@ -1,3 +1,31 @@
+
+body {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#backgorund {
+    background-image:url('background.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: 1;
+    pointer-events: none;
+}
+
+
 #codeadam a:link,
 #codeadam a:active,
 #codeadam a:hover,
@@ -6,7 +34,7 @@
 #docs a:active,
 #docs a:hover,
 #docs a:visited{
-    color: #000 !important;
+    color: #fff !important;
     text-decoration: none;
 }
 
@@ -29,5 +57,55 @@
     left: 0;
     font-size: 30px;
     padding: 15px;
-    color: #000;
+    color: #fff;
+}
+
+#comment {
+    width: 500px;
+    height: 200px;
+    font-size: 24px;
+    padding: 15px;
+    border: 2px solid #666;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#comment:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 10px rgba(74, 158, 255, 0.5);
+}
+
+#submit {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4a9eff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #357abd;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(74, 158, 255, 0.4);
+}
+
+#submit:active {
+    transform: scale(0.98);
+}
+
+#response {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
+    max-width: 600px;
 }
