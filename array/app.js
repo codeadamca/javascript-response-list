@@ -1,23 +1,28 @@
 
 let comment = document.getElementById("comment");
-let submit = document.getElementById("submit");
-let response = document.getElementById("response");
+let respon
 
-submit.addEventListener("click", function(){
+comment.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        handleSubmit();
+    }
+});
+
+
+async function handleSubmit() {
 
     comment.style.display = "none";
-    submit.style.display = "none";
     response.style.display = "block";
 
     response.innerHTML = responses[Math.floor(Math.random() * 20)];
     // console.log(responses[Math.floor(Math.random() * 20)]);
 
-});
+}
 
 function resetForm() {
 
     comment.style.display = "block";
-    submit.style.display = "block";
     response.style.display = "none";
     comment.value = "";
 

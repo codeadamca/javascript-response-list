@@ -15,6 +15,7 @@ body {
     background-image:url('background.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -24,7 +25,6 @@ body {
     z-index: 1;
     pointer-events: none;
 }
-
 
 #codeadam a:link,
 #codeadam a:active,
@@ -62,7 +62,7 @@ body {
 
 #comment {
     width: 500px;
-    height: 200px;
+    height: 30px;
     font-size: 24px;
     padding: 15px;
     border: 2px solid #666;
@@ -76,36 +76,14 @@ body {
 
 #comment:focus {
     outline: none;
-    border-color: #4a9eff;
+    border-color: #000;
     box-shadow: 0 0 10px rgba(74, 158, 255, 0.5);
 }
 
-#submit {
-    padding: 15px 40px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #4a9eff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-#submit:hover {
-    background-color: #357abd;
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(74, 158, 255, 0.4);
-}
-
-#submit:active {
-    transform: scale(0.98);
-}
-
 #response {
-    font-size: 24px;
+    display: none;
+    font-size: 32px;
     text-align: center;
-    margin-top: 30px;
     color: #fff;
     max-width: 600px;
 }

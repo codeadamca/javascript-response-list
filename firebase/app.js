@@ -1,47 +1,92 @@
 
-let comment = document.getElementById("comment");
-let submit = document.getElementById("submit");
-let response = document.getElementById("response");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-submit.addEventListener("click", function(){
+import {
+    getAI,
+    getGenerativeModel,
+    GoogleAIBackend
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAk0Cl1eMSQ_tE7YMMWUBYSqNiAZrW7YV4",
+    authDomain: "magicball8-75e43.firebaseapp.com",
+    projectId: "magicball8-75e43",
+    storageBucket: "magicball8-75e43.firebasestorage.app",
+    messagingSenderId: "896213587529",
+    appId: "1:896213587529:web:c82dfc6c443e7ff6b55198"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const ai = getAI(app, {
+    backend: new GoogleAIBackend()
+});
+
+
+const model = getGenerativeModel(ai, {
+    model: "gemini-3.8-flash"
+});
+
+
+const comment = document.getElementById("comment");
+const response = document.getElementById("response");
+
+
+comment.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        handleSubmit();
+    }
+});
+
+
+async function handleSubmit() {
 
     comment.style.display = "none";
-    submit.style.display = "none";
     response.style.display = "block";
+    response.innerHTML = "Thinking...";
 
-    response.innerHTML = responses[Math.floor(Math.random() * 20)];
-    // console.log(responses[Math.floor(Math.random() * 20)]);
+    try {
 
-});
+        if (!comment.value.trim()) {
+            throw new Error("Comment is blank.");
+        }
+
+        const result = await model.generateContent(
+            `You are a sarcastic Magic 8-Ball.
+
+Answer the user's question with a short,
+funny and sarcastic response.
+
+Do not explain your answer.
+Keep the response under 15 words.
+
+User's question:
+${comment.value}`
+        );
+
+        response.innerHTML = result.response.text();
+
+    } catch (error) {
+
+        console.error("AI error:", error);
+
+        response.innerHTML =
+            "The AI refuses to answer. Try again.";
+    }
+}
+
 
 function resetForm() {
 
     comment.style.display = "block";
-    submit.style.display = "block";
     response.style.display = "none";
     comment.value = "";
-
+    
 }
 
-const responses = [
-    "Oh, absolutely. Because that always works.",
-    "Sure. What could possibly go wrong?",
-    "Signs point to: you already know the answer.",
-    "Ask again when you're ready for the truth.",
-    "Highly unlikely. But points for optimism.",
-    "My sources say: seriously?",
-    "Yes. Against all reasonable expectations.",
-    "No. And I'm not explaining myself.",
-    "Outlook good. Your judgment, however, remains questionable.",
-    "Definitely. Regret is practically guaranteed.",
-    "Reply hazy. Try making a better question.",
-    "The universe has reviewed your request and laughed.",
-    "Maybe. If you lower your standards.",
-    "Absolutely not. Next question.",
-    "Ask again. I wasn't done judging you.",
-    "All signs point to a terrible idea.",
-    "It could happen. Stranger things have ruined people's lives.",
-    "Yes. Somehow, against my better judgment.",
-    "The answer is clear. You just don't like it.",
-    "Consult someone who actually knows what they're doing."
-];
+
+window.resetForm = resetForm;
